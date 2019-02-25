@@ -24,7 +24,7 @@ class App extends Component {
 
   state = {
     result: {},
-    header: "",
+    header: "Click an image to begin",
     count: 0,
     topCount: 0,
     imagesArray: [
@@ -47,7 +47,22 @@ class App extends Component {
   // handleIncrement increments this.state.count by 1
   handleIncrement = () => {
     // We always use the setState method to update a component's state
-    this.setState({ count: this.state.count + 1 });
+    this.setState({ count: this.state.count + 1,
+                    header: "You guessed correctly!"
+     });
+    this.shuffleArray();
+  };
+
+  reset = () => {
+    // We always use the setState method to update a component's state
+    console.log(this.state.count);
+    var currentCount = this.state.count;
+    this.setState({ topCount: currentCount,
+                    count: 0,
+                    header: "You guessed incorrectly!",
+                    imagesClicked:[]
+                  });
+    // this.setState({ count: 0 });
     this.shuffleArray();
   };
 
@@ -63,21 +78,32 @@ class App extends Component {
   // handleClick = event => {
     // console.log(event.target.name);
     const name = event.target.name;
+    var isPresent = false;
     // console.log(event.target.value);
     this.setState(currentState => {
       for (var i=0;i<currentState.imagesClicked.length;i++)
       {
-        console.log(currentState.imagesClicked[i]);
-        console.log([name]);
+        // console.log(currentState.imagesClicked[i]);
+        // console.log(name);
         if(currentState.imagesClicked[i] === name)
         {
-          console.log("Same");         
+          // console.log("Same"); 
+          isPresent = true;    
+          break;    
         }
-        else {
-          console.log("Not Same");           
-        }
+        // else {
+        //   console.log("Not Same");           
+        // }
       }
-      return {imagesClicked: [...currentState.imagesClicked,[name]]}
+
+      if (!isPresent) {
+        this.handleIncrement();  
+      }
+      else {
+        this.reset();
+      }
+    
+      return {imagesClicked: [...currentState.imagesClicked,name]}
     })
     console.log(this.state);
   }
@@ -113,7 +139,7 @@ class App extends Component {
                 <a href="#home"><h2>Clicky Game</h2></a>
               </div>
               <div className="d-flex align-items-center">
-                <h2>Click an image to begin!</h2>
+                <h2>{this.state.header}</h2>
               </div>
               <div className="logo">
                 <h3>Score: <span>{this.state.count}</span> | Top Score: <span>0</span></h3>

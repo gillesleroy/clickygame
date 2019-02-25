@@ -11,16 +11,14 @@ const Static = () => {
         <div className="header-wrap">
           <div className="header-top d-flex justify-content-between align-items-center">
             <div className="logo">
-              <a href="#home"><img src={require('../img/logo.png')} alt="" /></a>
+              {/* <a href="#home"><img src={require('../img/logo.png')} alt="" /></a> */}
+              <a href="#home"><h2>Clicky Game</h2></a>
             </div>
-            <div className="main-menubar d-flex align-items-center">
-              <nav className="hide">
-                <a href="#home">Home</a>
-                <a href="#functionalities">Functionalities</a>
-                <a href="#speaker">Speaker</a>
-                <a href="#upcoming">Upcoming event</a>
-              </nav>
-              <div className="menu-bar"><span className="lnr lnr-menu"></span></div>
+            <div className="d-flex align-items-center">
+              <h2>Click an image to begin!</h2>
+            </div>
+            <div className="logo">
+              <h3>Score: <span>0</span> | Top Score: <span>0</span></h3>
             </div>
           </div>
         </div>
